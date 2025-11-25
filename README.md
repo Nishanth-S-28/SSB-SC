@@ -52,10 +52,55 @@ Model Waveform
 <img width="706" height="167" alt="image" src="https://github.com/user-attachments/assets/bff0d8fd-d679-444e-af37-0b34585853c1" />
 
 Program
+```c
+ac=10;                // Carrier amplitude
+Am=11.1;              // Message amplitude
+fc=2000;             // Carrier frequency
+fm=500;              // Message frequency
+fs=20000;            // Sampling frequency
+t=0:1/fs:2/fm;       // Time base for two message cycles
+wc=2*3.14*fc;        // Carrier angular frequency
+wm=2*3.14*fm;        // Message angular frequency
+// Message signal
+e1=(Am*sin(wm*t));
+subplot(4,1,1);
+plot(t,e1);
+xtitle("Message Signal");
+xgrid();
+// Carrier signal
+e2=(ac*sin(wc*t));
+subplot(4,1,2);
+plot(t,e2);
+title("Carrier signal");
+xgrid
+// --- Sideband Components ---
+sbsc1=(Am/2.*cos(wc*t-wm*t))-(Am/2.*cos(wc*t+wm*t));
+sbsc2=(Am/2.*cos(wc*t-wm*t))+(Am/2.*cos(wc*t+wm*t));
 
+// Combination 1 (USB + LSB together => DSB-SC)
+e3=(sbsc2)+(sbsc1);
+subplot(4,1,3);
+plot(t,e3);
+title("USB + LSB together => DSB-SC");
+xgrid
+// Combination 2 (USB - LSB => isolates one sideband → SSB-SC)
+e4=(sbsc2)-(sbsc1);
+subplot(4,1,4);
+plot(t,e4);
+title("USB - LSB => isolates one sideband → SSB-SC");
+xgrid;
+```
 OUTPUT WAVEFORM
+<img width="1577" height="937" alt="Screenshot 2025-11-25 122227" src="https://github.com/user-attachments/assets/4a27d63c-88be-4aa3-9d15-fd09bf297f23" />
 
 TABULATION
+
+
+
+![IMG_20251125_122326](https://github.com/user-attachments/assets/85fa73b6-77b1-4ce0-bc90-1ee4abefbd04)
+
+![IMG_20251125_122336](https://github.com/user-attachments/assets/8953e330-14ef-42f0-bb2f-c2b5c77eaafe)
+
 
 
 
